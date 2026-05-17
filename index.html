@@ -207,62 +207,171 @@
   .section-title em { font-style: italic; color: var(--blush); }
  
   /* COLLECTIONS */
-  .collections { padding: 5rem 3rem; }
-  .collections-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
+
+.collections{
+  padding:5rem 3rem;
+  background:var(--warm);
+}
+
+.collections-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:2rem;
+  margin-bottom:2.5rem;
+  flex-wrap:wrap;
+}
+
+.collections-header p{
+  color:var(--muted);
+  font-weight:300;
+  max-width:420px;
+  line-height:1.8;
+}
+
+.view-all{
+  color:var(--sage);
+  text-decoration:none;
+  font-size:0.92rem;
+  font-weight:500;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  transition:all .25s ease;
+}
+
+.view-all:hover{
+  gap:12px;
+  color:var(--dark);
+}
+
+.collections-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1.2rem;
+}
+
+.collection-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+  cursor:pointer;
+  min-height:340px;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.collection-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 50px rgba(30,36,32,0.14);
+}
+
+.featured-card{
+  grid-column:span 2;
+}
+
+.short-card{
+  min-height:260px;
+}
+
+.card-bg{
+  position:absolute;
+  inset:0;
+}
+
+.card-bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s ease;
+}
+
+.collection-card:hover .card-bg img{
+  transform:scale(1.06);
+}
+
+.card-bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(30,36,32,0.72) 0%,
+      rgba(30,36,32,0.18) 55%,
+      rgba(30,36,32,0.05) 100%
+    );
+}
+
+.card-tag{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  z-index:2;
+
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+
+  color:#fff;
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+
+  padding:.45rem .9rem;
+  border-radius:999px;
+
+  border:1px solid rgba(255,255,255,0.15);
+}
+
+.card-overlay{
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:2;
+
+  padding:2rem 1.6rem 1.6rem;
+}
+
+.card-overlay h3{
+  font-family:'Cormorant Garamond', serif;
+  color:#fff;
+  font-size:1.7rem;
+  margin-bottom:.35rem;
+}
+
+.card-overlay p{
+  color:rgba(255,255,255,0.82);
+  font-size:.88rem;
+  line-height:1.5;
+  max-width:280px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .collections{
+    padding:3rem 1.5rem;
   }
-  .collections-header p { color: var(--muted); font-weight: 300; max-width: 360px; }
-  .view-all {
-    color: var(--sage);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    white-space: nowrap;
-    display: flex; align-items: center; gap: 6px;
-    transition: gap 0.2s;
+
+  .collections-grid{
+    grid-template-columns:1fr;
   }
-  .view-all:hover { gap: 10px; }
-  .collections-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
+
+  .featured-card{
+    grid-column:span 1;
   }
-  .collection-card {
-    border-radius: 18px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.2s;
+
+  .collection-card,
+  .short-card{
+    min-height:240px;
   }
-  .collection-card:hover { transform: scale(1.01); }
-  .collection-card:first-child { grid-column: span 2; height: 340px; }
-  .collection-card:not(:first-child) { height: 340px; }
-  .card-bg {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem;
-    position: relative;
-  }
-  .bg-1 { background: linear-gradient(135deg, #4A5E4A, #7A9A7A); }
-  .bg-2 { background: linear-gradient(135deg, #C4827A, #D4A29A); }
-  .bg-3 { background: linear-gradient(135deg, #8B7355, #A08060); }
-  .card-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.55));
-    padding: 2rem 1.5rem 1.5rem;
-  }
-  .card-overlay h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem; }
-  .card-overlay p { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
-  .card-tag {
-    position: absolute; top: 1rem; right: 1rem;
-    background: var(--blush);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.3rem 0.8rem;
-    border-radius: 2rem;
-  }
+
+}
  
   /* PRODUCTS */
   .products { padding: 5rem 3rem; background: var(--sage-pale); }
@@ -573,38 +682,93 @@
 </div>
  
 <section class="collections" id="collections">
+
   <div class="collections-header">
     <div>
       <p class="section-label">Explore</p>
       <h2 class="section-title">Our <em>collections</em></h2>
-      <p>Thoughtfully sourced from small independent makers around Britain.</p>
+      <p>
+        Thoughtfully sourced from independent British makers, artists,
+        and small creative studios.
+      </p>
     </div>
-    <a href="#" class="view-all">View all →</a>
+
+    <a href="#" class="view-all">
+      Browse all collections →
+    </a>
   </div>
+
   <div class="collections-grid">
-    <div class="collection-card">
-      <div class="card-bg bg-1">🏡</div>
-      <div class="card-tag">Most popular</div>
+
+    <!-- CARD 1 -->
+    <div class="collection-card featured-card">
+
+      <div class="card-bg">
+        <img
+          src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1400&auto=format&fit=crop"
+          alt="Homewares collection"
+        >
+      </div>
+
+      <div class="card-tag">
+        Best sellers
+      </div>
+
       <div class="card-overlay">
         <h3>Home & Living</h3>
-        <p>Candles, ceramics, prints & more · 80+ products</p>
+        <p>
+          Candles, ceramics, prints & seasonal décor
+        </p>
       </div>
+
     </div>
+
+    <!-- CARD 2 -->
     <div class="collection-card">
-      <div class="card-bg bg-2">💆</div>
-      <div class="card-tag">New in</div>
+
+      <div class="card-bg">
+        <img
+          src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=1200&auto=format&fit=crop"
+          alt="Wellbeing products"
+        >
+      </div>
+
+      <div class="card-tag">
+        New in
+      </div>
+
       <div class="card-overlay">
         <h3>Wellbeing</h3>
-        <p>Skincare, self-care & rituals</p>
+        <p>
+          Self-care, skincare & calming rituals
+        </p>
       </div>
+
     </div>
-    <div class="collection-card">
-      <div class="card-bg bg-3">🎀</div>
+
+    <!-- CARD 3 -->
+    <div class="collection-card short-card">
+
+      <div class="card-bg">
+        <img
+          src="https://images.unsplash.com/photo-1512909006721-3d6018887383?q=80&w=1200&auto=format&fit=crop"
+          alt="Gift boxes"
+        >
+      </div>
+
+      <div class="card-tag">
+        Local makers
+      </div>
+
       <div class="card-overlay">
         <h3>Gift Sets</h3>
-        <p>Ready to give, beautifully wrapped</p>
+        <p>
+          Beautifully wrapped gifts ready to give
+        </p>
       </div>
+
     </div>
+
   </div>
 </section>
  
