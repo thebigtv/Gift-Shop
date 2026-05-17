@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   :root {
     --sage: #4A5E4A;
     --sage-light: #7A9A7A;
@@ -19,7 +19,7 @@
     --muted: #6B7068;
     --border: rgba(74,94,74,0.15);
   }
-
+ 
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Outfit', sans-serif;
@@ -28,7 +28,7 @@
     font-size: 16px;
     line-height: 1.6;
   }
-
+ 
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -65,7 +65,7 @@
   .nav-cta:hover { background: var(--dark) !important; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
   .hamburger span { display: block; width: 24px; height: 2px; background: var(--sage); border-radius: 2px; }
-
+ 
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -73,63 +73,48 @@
     display: grid;
     grid-template-columns: 55% 45%;
   }
+ 
+  /* HERO LEFT — full bleed photo */
   .hero-left {
-    background: var(--sage);
-    display: flex; align-items: center; justify-content: center;
     position: relative;
     overflow: hidden;
-    padding: 4rem;
+    min-height: 500px;
   }
-  .hero-left::before {
+  .hero-left img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-left::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at 30% 70%, rgba(122,154,122,0.3) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(30,36,32,0.65) 0%, rgba(30,36,32,0.15) 45%, transparent 70%);
+    pointer-events: none;
   }
-  .hero-illustration {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
-  }
-  .shelf {
-    display: flex; gap: 20px; align-items: flex-end;
-    background: rgba(255,255,255,0.06);
-    border-radius: 8px;
-    padding: 20px 28px 8px;
-    border-bottom: 4px solid rgba(255,255,255,0.15);
-  }
-  .shelf-item {
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
-    font-size: 1.8rem;
-  }
-  .shelf-label {
-    font-size: 0.55rem;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-  .shelf-tag {
-    background: var(--blush);
-    color: #fff;
-    font-size: 0.55rem;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-family: 'Outfit', sans-serif;
-    font-weight: 500;
-  }
-  .shelf2 { margin-top: -8px; }
   .hero-badge-left {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.18);
+    position: absolute;
+    bottom: 2.5rem; left: 2.5rem;
+    z-index: 2;
+    background: rgba(30,36,32,0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
     border-radius: 12px;
     padding: 1rem 1.4rem;
     color: #fff;
-    text-align: center;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     line-height: 1.6;
-    opacity: 0.85;
-    max-width: 220px;
+    max-width: 260px;
   }
-
+  .hero-badge-left strong {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #fff;
+  }
+ 
   .hero-right {
     display: flex; flex-direction: column; justify-content: center;
     padding: 4rem 3.5rem 4rem 4rem;
@@ -185,7 +170,7 @@
     transition: all 0.2s;
   }
   .btn-outline:hover { background: var(--sage-pale); }
-
+ 
   /* FEATURES STRIP */
   .features-strip {
     background: var(--blush);
@@ -203,7 +188,7 @@
   .feature-item .icon { font-size: 1.3rem; margin-bottom: 0.2rem; }
   .feature-item strong { display: block; font-size: 0.92rem; font-weight: 500; }
   .feature-item span { font-size: 0.78rem; opacity: 0.8; }
-
+ 
   /* SECTION SHARED */
   .section-label {
     font-size: 0.75rem;
@@ -220,11 +205,9 @@
     margin-bottom: 0.5rem;
   }
   .section-title em { font-style: italic; color: var(--blush); }
-
+ 
   /* COLLECTIONS */
-  .collections {
-    padding: 5rem 3rem;
-  }
+  .collections { padding: 5rem 3rem; }
   .collections-header {
     display: flex; justify-content: space-between; align-items: flex-end;
     margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;
@@ -240,7 +223,6 @@
     transition: gap 0.2s;
   }
   .view-all:hover { gap: 10px; }
-
   .collections-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -254,10 +236,7 @@
     transition: transform 0.2s;
   }
   .collection-card:hover { transform: scale(1.01); }
-  .collection-card:first-child {
-    grid-column: span 2;
-    height: 340px;
-  }
+  .collection-card:first-child { grid-column: span 2; height: 340px; }
   .collection-card:not(:first-child) { height: 340px; }
   .card-bg {
     width: 100%; height: 100%;
@@ -273,12 +252,7 @@
     background: linear-gradient(transparent, rgba(0,0,0,0.55));
     padding: 2rem 1.5rem 1.5rem;
   }
-  .card-overlay h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 0.2rem;
-  }
+  .card-overlay h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #fff; margin-bottom: 0.2rem; }
   .card-overlay p { font-size: 0.82rem; color: rgba(255,255,255,0.75); }
   .card-tag {
     position: absolute; top: 1rem; right: 1rem;
@@ -289,12 +263,9 @@
     padding: 0.3rem 0.8rem;
     border-radius: 2rem;
   }
-
+ 
   /* PRODUCTS */
-  .products {
-    padding: 5rem 3rem;
-    background: var(--sage-pale);
-  }
+  .products { padding: 5rem 3rem; background: var(--sage-pale); }
   .products-header { margin-bottom: 2.5rem; }
   .products-grid {
     display: grid;
@@ -314,7 +285,9 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 3rem;
     position: relative;
+    overflow: hidden;
   }
+  .product-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .pi-1 { background: linear-gradient(135deg, #EDF2ED, #D4E4D4); }
   .pi-2 { background: linear-gradient(135deg, #F7EDEC, #EDD4D0); }
   .pi-3 { background: linear-gradient(135deg, #F5EFE0, #E8DCC8); }
@@ -322,7 +295,7 @@
   .pi-5 { background: linear-gradient(135deg, #F7EDEC, #E4C4C0); }
   .pi-6 { background: linear-gradient(135deg, #EEF0EE, #D8DDD8); }
   .new-badge {
-    position: absolute; top: 10px; left: 10px;
+    position: absolute; top: 10px; left: 10px; z-index: 1;
     background: var(--sage);
     color: #fff;
     font-size: 0.65rem;
@@ -333,7 +306,7 @@
     text-transform: uppercase;
   }
   .sale-badge {
-    position: absolute; top: 10px; left: 10px;
+    position: absolute; top: 10px; left: 10px; z-index: 1;
     background: var(--blush);
     color: #fff;
     font-size: 0.65rem;
@@ -344,18 +317,8 @@
     text-transform: uppercase;
   }
   .product-info { padding: 1.1rem 1.2rem 1.3rem; }
-  .product-info h3 {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--dark);
-    margin-bottom: 0.2rem;
-  }
-  .product-info .cat {
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-weight: 300;
-    margin-bottom: 0.7rem;
-  }
+  .product-info h3 { font-size: 0.95rem; font-weight: 500; color: var(--dark); margin-bottom: 0.2rem; }
+  .product-info .cat { font-size: 0.78rem; color: var(--muted); font-weight: 300; margin-bottom: 0.7rem; }
   .product-footer { display: flex; justify-content: space-between; align-items: center; }
   .price { font-size: 1rem; font-weight: 500; color: var(--sage); }
   .price .was { text-decoration: line-through; color: var(--muted); font-weight: 300; font-size: 0.85rem; margin-right: 4px; }
@@ -371,7 +334,7 @@
     line-height: 1;
   }
   .add-btn:hover { background: var(--sage); color: #fff; }
-
+ 
   /* ABOUT */
   .about {
     padding: 5rem 3rem;
@@ -380,42 +343,24 @@
     gap: 5rem;
     align-items: center;
   }
+  /* About visual — real photo */
   .about-visual {
-    background: var(--sage);
     border-radius: 24px;
     height: 420px;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    gap: 1.5rem;
-    position: relative;
     overflow: hidden;
+    position: relative;
   }
-  .about-visual::before {
+  .about-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-visual::after {
     content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(circle at 70% 30%, rgba(122,154,122,0.4), transparent 60%);
-  }
-  .about-icons {
-    font-size: 3rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    position: relative; z-index: 1;
-    text-align: center;
-  }
-  .about-icon-item {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px;
-    padding: 1.5rem;
-  }
-  .about-icon-item p {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.6);
-    margin-top: 0.4rem;
-    font-family: 'Outfit', sans-serif;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(30,36,32,0.4) 0%, transparent 60%);
+    pointer-events: none;
   }
   .about blockquote {
     font-family: 'Cormorant Garamond', serif;
@@ -428,7 +373,7 @@
     line-height: 1.8;
   }
   .about p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 1.2rem; }
-
+ 
   /* VISIT */
   .visit {
     background: var(--dark);
@@ -441,19 +386,11 @@
   .visit .section-label { color: var(--blush); }
   .visit .section-title { color: #fff; }
   .hours-table { margin-top: 1.5rem; width: 100%; }
-  .hours-table tr td {
-    padding: 0.65rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    font-size: 0.92rem;
-    color: rgba(255,255,255,0.65);
-  }
+  .hours-table tr td { padding: 0.65rem 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.92rem; color: rgba(255,255,255,0.65); }
   .hours-table tr td:last-child { text-align: right; color: #8FB88F; }
   .hours-table tr.today td { color: #fff; font-weight: 500; }
-
   .visit-right { display: flex; flex-direction: column; justify-content: space-between; }
-  .visit-address {
-    margin-top: 1.5rem;
-  }
+  .visit-address { margin-top: 1.5rem; }
   .visit-address strong { color: #fff; font-size: 1.05rem; display: block; margin-bottom: 0.5rem; }
   .visit-address p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 0.3rem; font-weight: 300; }
   .map-block {
@@ -477,18 +414,12 @@
     transition: gap 0.2s;
   }
   .dir-link:hover { gap: 10px; }
-
+ 
   /* NEWSLETTER */
-  .newsletter {
-    background: var(--blush-pale);
-    padding: 4rem 3rem;
-    text-align: center;
-  }
+  .newsletter { background: var(--blush-pale); padding: 4rem 3rem; text-align: center; }
   .newsletter .section-title { font-size: 2rem; margin-bottom: 0.8rem; }
   .newsletter p { color: var(--muted); font-weight: 300; margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto; }
-  .nl-form {
-    display: flex; gap: 0.8rem; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center;
-  }
+  .nl-form { display: flex; gap: 0.8rem; max-width: 440px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
   .nl-form input {
     flex: 1; min-width: 220px;
     padding: 0.85rem 1.3rem;
@@ -514,24 +445,15 @@
     transition: background 0.2s;
   }
   .nl-form button:hover { background: var(--sage); }
-
+ 
   /* CONTACT */
-  .contact {
-    padding: 5rem 3rem;
-    background: var(--warm);
-  }
-  .contact-inner {
-    max-width: 580px;
-    margin: 0 auto;
-    text-align: center;
-  }
+  .contact { padding: 5rem 3rem; background: var(--warm); }
+  .contact-inner { max-width: 580px; margin: 0 auto; text-align: center; }
   .contact-inner .section-label, .contact-inner .section-title { text-align: center; }
   .contact-inner > p { color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; }
   .contact-form { display: grid; gap: 1rem; text-align: left; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .contact-form input,
-  .contact-form textarea,
-  .contact-form select {
+  .contact-form input, .contact-form textarea, .contact-form select {
     width: 100%;
     padding: 0.85rem 1.2rem;
     border: 1.5px solid rgba(74,94,74,0.2);
@@ -543,9 +465,7 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  .contact-form input:focus,
-  .contact-form textarea:focus,
-  .contact-form select:focus { border-color: var(--sage); }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--sage); }
   .contact-form textarea { resize: vertical; min-height: 120px; }
   .contact-form button {
     background: var(--sage);
@@ -560,56 +480,39 @@
     transition: background 0.2s;
   }
   .contact-form button:hover { background: var(--dark); }
-
+ 
   /* FOOTER */
-  footer {
-    background: var(--dark);
-    color: rgba(255,255,255,0.5);
-    padding: 2.5rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .footer-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    color: #fff;
-  }
+  footer { background: var(--dark); color: rgba(255,255,255,0.5); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #fff; }
   footer a { color: var(--blush); text-decoration: none; }
   .footer-links { display: flex; gap: 1.5rem; font-size: 0.85rem; }
   footer p { font-size: 0.82rem; }
-
+ 
   /* MOBILE */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
-
     .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { height: 300px; padding: 2rem; }
+    .hero-left { height: 320px; min-height: unset; }
+    .hero-badge-left { bottom: 1.5rem; left: 1.5rem; }
     .hero-right { padding: 2.5rem 1.5rem; }
-
     .features-strip { padding: 1.5rem 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .feature-item { border-right: none; flex: 0 0 45%; }
-
     .collections, .products, .about, .visit, .newsletter, .contact { padding: 3rem 1.5rem; }
     .collections-grid { grid-template-columns: 1fr; }
     .collection-card:first-child { grid-column: span 1; }
     .collection-card { height: 220px; }
-
     .about { grid-template-columns: 1fr; gap: 2rem; }
     .about-visual { height: 280px; }
     .visit { grid-template-columns: 1fr; gap: 2.5rem; }
-
     .form-row { grid-template-columns: 1fr; }
     footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
   }
 </style>
 </head>
 <body>
-
+ 
 <nav>
   <a href="#" class="nav-logo">Bramble & Co</a>
   <ul class="nav-links">
@@ -622,27 +525,19 @@
     <span></span><span></span><span></span>
   </div>
 </nav>
-
+ 
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-illustration">
-      <div class="shelf">
-        <div class="shelf-item">🕯️<span class="shelf-label">Candles</span></div>
-        <div class="shelf-item">🌿<span class="shelf-label">Plants</span></div>
-        <div class="shelf-item">📦<span class="shelf-label">Gifts</span><span class="shelf-tag">New</span></div>
-        <div class="shelf-item">🪴<span class="shelf-label">Homewares</span></div>
-      </div>
-      <div class="shelf shelf2">
-        <div class="shelf-item">🧴<span class="shelf-label">Skincare</span></div>
-        <div class="shelf-item">📚<span class="shelf-label">Stationery</span></div>
-        <div class="shelf-item">🎀<span class="shelf-label">Wrapping</span></div>
-      </div>
-      <div class="hero-badge-left">
-        🌱 Supporting local makers &amp; independent brands since 2016
-      </div>
+    <img
+      src="https://images.unsplash.com/photo-1604176354204-9268737828e4?q=80&w=1200&auto=format&fit=crop"
+      alt="Bramble & Co shop interior"
+    >
+    <div class="hero-badge-left">
+      <strong>Independent since 2016</strong>
+      Supporting local makers &amp; independent British brands
     </div>
   </div>
-
+ 
   <div class="hero-right">
     <span class="hero-tag">Independent · Local · Thoughtful</span>
     <h1 class="hero-title">Gifts worth <em>giving</em>, finds worth <em>keeping</em></h1>
@@ -653,7 +548,7 @@
     </div>
   </div>
 </section>
-
+ 
 <div class="features-strip">
   <div class="feature-item">
     <div class="icon">🇬🇧</div>
@@ -676,7 +571,7 @@
     <span>In-store & online</span>
   </div>
 </div>
-
+ 
 <section class="collections" id="collections">
   <div class="collections-header">
     <div>
@@ -712,7 +607,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="products">
   <div class="products-header">
     <p class="section-label">Handpicked for you</p>
@@ -720,9 +615,12 @@
   </div>
   <div class="products-grid">
     <div class="product-card">
-      <div class="product-image pi-1"><div class="new-badge">New</div><img src="https://nidranomad.co.uk/cdn/shop/products/TEMPLE_2_Original_550x.jpg?v=1659180099" alt="Homewares" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="product-info">
-         <h3>Amber & Sandalwood Candle</h3>
+      <div class="product-image pi-1">
+        <div class="new-badge">New</div>
+        <img src="https://nidranomad.co.uk/cdn/shop/products/TEMPLE_2_Original_550x.jpg?v=1659180099" alt="Amber & Sandalwood Candle">
+      </div>
+      <div class="product-info">
+        <h3>Amber & Sandalwood Candle</h3>
         <div class="cat">Home fragrance</div>
         <div class="product-footer">
           <span class="price">£18.00</span>
@@ -731,7 +629,10 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="product-image pi-2"><div class="sale-badge">Sale</div><img src="https://images.beautybay.com/eoaaqxyywn6o/ZOEV0542F_2.jpg_s3.lmb_u6ysbh/a4404fa580bfdcb01237217987aecba6/ZOEV0542F_2.jpg?w=700&fm=webp&q=70" alt="Skincare" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="product-image pi-2">
+        <div class="sale-badge">Sale</div>
+        <img src="https://images.beautybay.com/eoaaqxyywn6o/ZOEV0542F_2.jpg_s3.lmb_u6ysbh/a4404fa580bfdcb01237217987aecba6/ZOEV0542F_2.jpg?w=700&fm=webp&q=70" alt="Rose Clay Face Mask">
+      </div>
       <div class="product-info">
         <h3>Rose Clay Face Mask</h3>
         <div class="cat">Skincare</div>
@@ -742,7 +643,9 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="product-image pi-3"><img src="https://ellajames.co.uk/cdn/shop/files/CM0201CamCoffeeMug-Mocha_Setof2__0193-1200px.jpg?v=1764424131&width=540" alt="Homewares" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="product-image pi-3">
+        <img src="https://ellajames.co.uk/cdn/shop/files/CM0201CamCoffeeMug-Mocha_Setof2__0193-1200px.jpg?v=1764424131&width=540" alt="Hand-thrown Ceramic Mug">
+      </div>
       <div class="product-info">
         <h3>Hand-thrown Ceramic Mug</h3>
         <div class="cat">Ceramics</div>
@@ -753,7 +656,10 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="product-image pi-4"><span class="new-badge">New</span><img src="https://130558117.cdn6.editmysite.com/uploads/1/3/0/5/130558117/2G3GTXH4H7PMCI27JFV74SZY.jpeg?width=2400&optimize=medium" alt="Giftsets" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="product-image pi-4">
+        <div class="new-badge">New</div>
+        <img src="https://130558117.cdn6.editmysite.com/uploads/1/3/0/5/130558117/2G3GTXH4H7PMCI27JFV74SZY.jpeg?width=2400&optimize=medium" alt="Botanical Gift Set">
+      </div>
       <div class="product-info">
         <h3>Botanical Gift Set</h3>
         <div class="cat">Gift sets</div>
@@ -764,7 +670,9 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="product-image pi-5"><img src="https://honestpaper.com.au/cdn/shop/files/4bf0731fc45f2aa4c46c068e0b89d2fc8d96e41df9a711f4bbedaaa1b7efdbfd_540x.jpg?v=1752561625" alt="Gifts" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="product-image pi-5">
+        <img src="https://honestpaper.com.au/cdn/shop/files/4bf0731fc45f2aa4c46c068e0b89d2fc8d96e41df9a711f4bbedaaa1b7efdbfd_540x.jpg?v=1752561625" alt="Linen-bound Journal">
+      </div>
       <div class="product-info">
         <h3>Linen-bound Journal</h3>
         <div class="cat">Stationery</div>
@@ -775,7 +683,9 @@
       </div>
     </div>
     <div class="product-card">
-      <div class="product-image pi-6"><img src="https://finelypressed.com/cdn/shop/files/pressed-flower-frame-cluster-style.jpg?v=1744877438&width=360" alt="Gifts" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="product-image pi-6">
+        <img src="https://finelypressed.com/cdn/shop/files/pressed-flower-frame-cluster-style.jpg?v=1744877438&width=360" alt="Pressed Flower Print">
+      </div>
       <div class="product-info">
         <h3>Pressed Flower Print</h3>
         <div class="cat">Wall art</div>
@@ -787,15 +697,13 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="about" id="about">
   <div class="about-visual">
-    <div class="about-icons">
-      <div class="about-icon-item">🌱<p>Sustainable</p></div>
-      <div class="about-icon-item">🤝<p>Local makers</p></div>
-      <div class="about-icon-item">💚<p>Ethical</p></div>
-      <div class="about-icon-item">✨<p>Curated</p></div>
-    </div>
+    <img
+      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop"
+      alt="Inside Bramble & Co"
+    >
   </div>
   <div>
     <p class="section-label">Who we are</p>
@@ -806,7 +714,7 @@
     <a href="#contact" class="btn-sage" style="margin-top: 0.5rem; display: inline-block;">Get in touch</a>
   </div>
 </section>
-
+ 
 <section class="visit" id="visit">
   <div>
     <p class="section-label">Plan your visit</p>
@@ -833,7 +741,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="newsletter">
   <p class="section-label">Stay in the loop</p>
   <h2 class="section-title">New arrivals & <em>offers</em></h2>
@@ -843,7 +751,7 @@
     <button type="submit">Subscribe</button>
   </form>
 </section>
-
+ 
 <section class="contact" id="contact">
   <div class="contact-inner">
     <p class="section-label">Get in touch</p>
@@ -866,7 +774,7 @@
     </form>
   </div>
 </section>
-
+ 
 <footer>
   <div>
     <div class="footer-logo">Bramble & Co</div>
@@ -879,7 +787,7 @@
   </div>
   <p>© 2025 Bramble & Co</p>
 </footer>
-
+ 
 <script>
   document.getElementById('hamburger').addEventListener('click', function() {
     const nav = document.querySelector('.nav-links');
